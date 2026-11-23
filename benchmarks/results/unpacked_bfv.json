@@ -1,0 +1,153 @@
+{
+ "machine_validation": "Intel(R) Xeon(R) Processor @ 2.10GHz",
+ "unit_costs_here": {
+  "encrypt": 0.002397582806219923,
+  "add": 4.3477042954661127e-05,
+  "decrypt": 0.0012101738476422354
+ },
+ "validation": {
+  "sum": {
+   "adds": 1000000,
+   "decrypts": 1,
+   "measured": 50.48296129200003,
+   "model": 43.47825312850877,
+   "measured_over_model": 1.161108316444716
+  },
+  "filter": {
+   "adds": 9957,
+   "decrypts": 1,
+   "measured": 0.492564399999992,
+   "model": 0.43411109054720304,
+   "measured_over_model": 1.1346505784478065
+  },
+  "groupby": {
+   "adds": 1000000,
+   "decrypts": 64,
+   "measured": 74.96214440999984,
+   "model": 43.55449408091023,
+   "measured_over_model": 1.7211115865734612
+  }
+ },
+ "unit_costs_projection": {
+  "encrypt": 0.002228094347438786,
+  "add": 4.057667088658823e-05,
+  "decrypt": 0.00129735452399478
+ },
+ "unit_source": "results/primitives.json",
+ "ops": {
+  "ingest": {
+   "seconds": 2228.094347438786,
+   "server": 0.0,
+   "client": 2228.094347438786,
+   "bytes": 413696000000,
+   "projected": true,
+   "encrypts": 1000000,
+   "adds": 0,
+   "decrypts": 0
+  },
+  "sum": {
+   "seconds": 40.577968241112224,
+   "server": 40.57667088658823,
+   "client": 0.00129735452399478,
+   "bytes": 413696,
+   "projected": true,
+   "encrypts": 0,
+   "adds": 1000000,
+   "decrypts": 1
+  },
+  "filter": {
+   "seconds": 0.4070640633898771,
+   "server": 0.40576670886588234,
+   "client": 0.00129735452399478,
+   "bytes": 413696,
+   "projected": true,
+   "encrypts": 0,
+   "adds": 10000,
+   "decrypts": 1
+  },
+  "groupby": {
+   "seconds": 40.6597015761239,
+   "server": 40.57667088658823,
+   "client": 0.08303068953566592,
+   "bytes": 26476544,
+   "projected": true,
+   "encrypts": 0,
+   "adds": 1000000,
+   "decrypts": 64
+  },
+  "update": {
+   "seconds": 0.002228094347438786,
+   "server": 0.0,
+   "client": 0.002228094347438786,
+   "bytes": 413696,
+   "projected": true,
+   "encrypts": 1,
+   "adds": 0,
+   "decrypts": 0
+  }
+ },
+ "tpch": {
+  "queries": {
+   "Q1": {
+    "hom_server": 119.93692957328636,
+    "hom_client": 0.0259470904798956,
+    "rel": 0.20372494299999744,
+    "total": 120.16660160676625,
+    "shipped": 8274048,
+    "adds": 2955810,
+    "decrypts": 20,
+    "projected": true
+   },
+   "Q3": {
+    "hom_server": 0.11876791568504376,
+    "hom_client": 1.4634159030661118,
+    "rel": 0.03321948699999666,
+    "total": 1.6154033057511523,
+    "shipped": 466649568,
+    "adds": 2927,
+    "decrypts": 1128,
+    "projected": true
+   },
+   "Q5": {
+    "hom_server": 0.023899659152200468,
+    "hom_client": 0.0064867726199739,
+    "rel": 0.016318372000114323,
+    "total": 0.046704803772288694,
+    "shipped": 2068560,
+    "adds": 589,
+    "decrypts": 5,
+    "projected": true
+   },
+   "Q6": {
+    "hom_server": 0.46878227875275386,
+    "hom_client": 0.00129735452399478,
+    "rel": 0.006441671999937171,
+    "total": 0.4765213052766858,
+    "shipped": 413696,
+    "adds": 11553,
+    "decrypts": 1,
+    "projected": true
+   },
+   "Q10": {
+    "hom_server": 0.4630609681577449,
+    "hom_client": 5.009085817143846,
+    "rel": 0.015316726000037306,
+    "total": 5.487463511301628,
+    "shipped": 1597280576,
+    "adds": 11412,
+    "decrypts": 3861,
+    "projected": true
+   }
+  },
+  "ingest": {
+   "seconds": 8015.712012949269,
+   "storage": 1488297836544,
+   "projected": true
+  }
+ },
+ "ct_bytes": 413696,
+ "rows": 1000000,
+ "groups": 64,
+ "selectivity": 0.01,
+ "pool": 64
+}

@@ -1,0 +1,347 @@
+{
+ "machine": {
+  "cpu": "Intel(R) Xeon(R) Processor @ 2.10GHz"
+ },
+ "rows": 50000,
+ "readings": 1000000,
+ "writers": {
+  "rows": [
+   {
+    "b": 1,
+    "bytes": {
+     "paillier": 512,
+     "paillier_packed": 512.0,
+     "ecelgamal": 66,
+     "bfv": 413696.0,
+     "kemdem": 1124.0
+    },
+    "writer": {
+     "paillier": 0.010391568206185503,
+     "paillier_packed": 0.010391568206185503,
+     "ecelgamal": 0.000100454196886001,
+     "bfv": 0.0021632215939521113,
+     "kemdem": 2.5252648619270027e-05
+    },
+    "server": {
+     "paillier": 5.969569596666892e-06,
+     "paillier_packed": 5.969569596666892e-06,
+     "ecelgamal": 1.5156844200000055e-06,
+     "bfv": 4.307273403109117e-05,
+     "kemdem": 0.0
+    },
+    "owner_bytes": {
+     "paillier": 512,
+     "paillier_packed": 512,
+     "ecelgamal": 66,
+     "bfv": 413696,
+     "kemdem": 1124000000.0
+    }
+   },
+   {
+    "b": 4,
+    "bytes": {
+     "paillier": 512,
+     "paillier_packed": 128.0,
+     "ecelgamal": 66,
+     "bfv": 103424.0,
+     "kemdem": 287.0
+    },
+    "writer": {
+     "paillier": 0.010391568206185503,
+     "paillier_packed": 0.0025978920515463758,
+     "ecelgamal": 0.000100454196886001,
+     "bfv": 0.0005408053984880278,
+     "kemdem": 6.323597719598567e-06
+    },
+    "server": {
+     "paillier": 5.969569596666892e-06,
+     "paillier_packed": 1.492392399166723e-06,
+     "ecelgamal": 1.5156844200000055e-06,
+     "bfv": 1.0768183507772792e-05,
+     "kemdem": 0.0
+    },
+    "owner_bytes": {
+     "paillier": 512,
+     "paillier_packed": 512,
+     "ecelgamal": 66,
+     "bfv": 413696,
+     "kemdem": 287000000.0
+    }
+   },
+   {
+    "b": 16,
+    "bytes": {
+     "paillier": 512,
+     "paillier_packed": 32.0,
+     "ecelgamal": 66,
+     "bfv": 25856.0,
+     "kemdem": 77.75
+    },
+    "writer": {
+     "paillier": 0.010391568206185503,
+     "paillier_packed": 0.0006494730128865939,
+     "ecelgamal": 0.000100454196886001,
+     "bfv": 0.00013520134962200696,
+     "kemdem": 1.606147082837621e-06
+    },
+    "server": {
+     "paillier": 5.969569596666892e-06,
+     "paillier_packed": 3.7309809979168073e-07,
+     "ecelgamal": 1.5156844200000055e-06,
+     "bfv": 2.692045876943198e-06,
+     "kemdem": 0.0
+    },
+    "owner_bytes": {
+     "paillier": 512,
+     "paillier_packed": 512,
+     "ecelgamal": 66,
+     "bfv": 413696,
+     "kemdem": 77750000.0
+    }
+   },
+   {
+    "b": 64,
+    "bytes": {
+     "paillier": 512,
+     "paillier_packed": 16.0,
+     "ecelgamal": 66,
+     "bfv": 6464.0,
+     "kemdem": 25.4375
+    },
+    "writer": {
+     "paillier": 0.010391568206185503,
+     "paillier_packed": 0.00032473650644329697,
+     "ecelgamal": 0.000100454196886001,
+     "bfv": 3.380033740550174e-05,
+     "kemdem": 4.168711282139206e-07
+    },
+    "server": {
+     "paillier": 5.969569596666892e-06,
+     "paillier_packed": 1.8654904989584037e-07,
+     "ecelgamal": 1.5156844200000055e-06,
+     "bfv": 6.730114692357995e-07,
+     "kemdem": 0.0
+    },
+    "owner_bytes": {
+     "paillier": 512,
+     "paillier_packed": 512,
+     "ecelgamal": 66,
+     "bfv": 413696,
+     "kemdem": 25437500.0
+    }
+   },
+   {
+    "b": 256,
+    "bytes": {
+     "paillier": 512,
+     "paillier_packed": 16.0,
+     "ecelgamal": 66,
+     "bfv": 1616.0,
+     "kemdem": 12.359375
+    },
+    "writer": {
+     "paillier": 0.010391568206185503,
+     "paillier_packed": 0.00032473650644329697,
+     "ecelgamal": 0.000100454196886001,
+     "bfv": 8.450084351375435e-06,
+     "kemdem": 1.2050699269072546e-07
+    },
+    "server": {
+     "paillier": 5.969569596666892e-06,
+     "paillier_packed": 1.8654904989584037e-07,
+     "ecelgamal": 1.5156844200000055e-06,
+     "bfv": 1.6825286730894988e-07,
+     "kemdem": 0.0
+    },
+    "owner_bytes": {
+     "paillier": 512,
+     "paillier_packed": 512,
+     "ecelgamal": 66,
+     "bfv": 413696,
+     "kemdem": 12359375.0
+    }
+   },
+   {
+    "b": 1024,
+    "bytes": {
+     "paillier": 512,
+     "paillier_packed": 16.0,
+     "ecelgamal": 66,
+     "bfv": 404.0,
+     "kemdem": 9.08984375
+    },
+    "writer": {
+     "paillier": 0.010391568206185503,
+     "paillier_packed": 0.00032473650644329697,
+     "ecelgamal": 0.000100454196886001,
+     "bfv": 2.1125210878438587e-06,
+     "kemdem": 4.5964340387331216e-08
+    },
+    "server": {
+     "paillier": 5.969569596666892e-06,
+     "paillier_packed": 1.8654904989584037e-07,
+     "ecelgamal": 1.5156844200000055e-06,
+     "bfv": 4.206321682723747e-08,
+     "kemdem": 0.0
+    },
+    "owner_bytes": {
+     "paillier": 512,
+     "paillier_packed": 512,
+     "ecelgamal": 66,
+     "bfv": 413696,
+     "kemdem": 9089843.75
+    }
+   },
+   {
+    "b": 4096,
+    "bytes": {
+     "paillier": 512,
+     "paillier_packed": 16.0,
+     "ecelgamal": 66,
+     "bfv": 101.0,
+     "kemdem": 8.2724609375
+    },
+    "writer": {
+     "paillier": 0.010391568206185503,
+     "paillier_packed": 0.00032473650644329697,
+     "ecelgamal": 0.000100454196886001,
+     "bfv": 5.281302719609647e-07,
+     "kemdem": 2.8668388728521928e-08
+    },
+    "server": {
+     "paillier": 5.969569596666892e-06,
+     "paillier_packed": 1.8654904989584037e-07,
+     "ecelgamal": 1.5156844200000055e-06,
+     "bfv": 1.0515804206809367e-08,
+     "kemdem": 0.0
+    },
+    "owner_bytes": {
+     "paillier": 512,
+     "paillier_packed": 512,
+     "ecelgamal": 66,
+     "bfv": 413696,
+     "kemdem": 8272460.9375
+    }
+   },
+   {
+    "b": 8192,
+    "bytes": {
+     "paillier": 512,
+     "paillier_packed": 16.0,
+     "ecelgamal": 66,
+     "bfv": 50.5,
+     "kemdem": 8.13623046875
+    },
+    "writer": {
+     "paillier": 0.010391568206185503,
+     "paillier_packed": 0.00032473650644329697,
+     "ecelgamal": 0.000100454196886001,
+     "bfv": 2.6406513598048234e-07,
+     "kemdem": 2.4094229562154542e-08
+    },
+    "server": {
+     "paillier": 5.969569596666892e-06,
+     "paillier_packed": 1.8654904989584037e-07,
+     "ecelgamal": 1.5156844200000055e-06,
+     "bfv": 5.257902103404684e-09,
+     "kemdem": 0.0
+    },
+    "owner_bytes": {
+     "paillier": 512,
+     "paillier_packed": 512,
+     "ecelgamal": 66,
+     "bfv": 413696,
+     "kemdem": 8136230.46875
+    }
+   }
+  ],
+  "unit": {
+   "paillier_public_encrypt": 0.010391568206185503,
+   "ecelgamal_encrypt": 0.000100454196886001,
+   "bfv_encrypt": 0.0021632215939521113,
+   "mlkem768_encaps": 2.4128723030521146e-05,
+   "paillier_add": 5.969569596666892e-06,
+   "ecelgamal_add": 1.5156844200000055e-06,
+   "bfv_add": 4.307273403109117e-05,
+   "paillier_decrypt": 0.002980562571427943,
+   "bfv_decrypt": 0.0012611526027743625,
+   "ecelgamal_decrypt_2_24": 0.0016061318940610713
+  },
+  "sizes": {
+   "paillier": 512,
+   "ecelgamal": 66,
+   "bfv": 413696,
+   "mlkem768_ct": 1088
+  }
+ },
+ "ledger": {
+  "HMAC-SHA256": {
+   "sig_bytes": 32,
+   "sign_seconds": 0.08972830500010787,
+   "insert_seconds": 0.059595180000087566,
+   "db_bytes": 7340032,
+   "scan_seconds": 0.004389805000073466,
+   "verify_seconds": 0.10646119499983797,
+   "postgres": {
+    "copy_seconds": 0.136167,
+    "heap_bytes": 9175040,
+    "toast_bytes": 0,
+    "total_bytes": 10354688,
+    "scan_payload_seconds": 0.003733,
+    "fetch_signatures_seconds": 0.002913,
+    "btree_on_signature": "ok"
+   }
+  },
+  "ECDSA P-256": {
+   "sig_bytes": 71,
+   "sign_seconds": 1.5302343700000165,
+   "insert_seconds": 0.061646118999988175,
+   "db_bytes": 9342976,
+   "scan_seconds": 0.0038443480000296404,
+   "verify_seconds": 4.831433890999961,
+   "postgres": {
+    "copy_seconds": 0.17308199999999999,
+    "heap_bytes": 11141120,
+    "toast_bytes": 0,
+    "total_bytes": 12320768,
+    "scan_payload_seconds": 0.004163999999999999,
+    "fetch_signatures_seconds": 0.00313,
+    "btree_on_signature": "ok"
+   }
+  },
+  "ML-DSA-44": {
+   "sig_bytes": 2420,
+   "sign_seconds": 31.62730968799997,
+   "insert_seconds": 0.4682883170000878,
+   "db_bytes": 205303808,
+   "scan_seconds": 0.0444773899998836,
+   "verify_seconds": 6.762856420000162,
+   "postgres": {
+    "copy_seconds": 2.5025720000000002,
+    "heap_bytes": 8388608,
+    "toast_bytes": 136536064,
+    "total_bytes": 148422656,
+    "scan_payload_seconds": 0.005683,
+    "fetch_signatures_seconds": 0.14037200000000002,
+    "btree_on_signature": "ok"
+   }
+  },
+  "ML-DSA-65": {
+   "sig_bytes": 3309,
+   "sign_seconds": 50.906543403000114,
+   "insert_seconds": 0.4703352270000778,
+   "db_bytes": 205303808,
+   "scan_seconds": 0.05536193500006448,
+   "verify_seconds": 9.917914021000115,
+   "postgres": {
+    "copy_seconds": 2.974659,
+    "heap_bytes": 8388608,
+    "toast_bytes": 204800000,
+    "total_bytes": 216702976,
+    "scan_payload_seconds": 0.003311,
+    "fetch_signatures_seconds": 0.1549,
+    "btree_on_signature": "ERROR:  index row size 3328 exceeds btree version 4 maximum 2704 for index \"t_sig\""
+   }
+  }
+ }
+}

@@ -1,0 +1,43 @@
+{
+ "machine": {
+  "cpu": "Intel(R) Xeon(R) Processor @ 2.10GHz",
+  "logical_cpus": 2
+ },
+ "keys": 100000,
+ "data_key_bits": 256,
+ "method": "single thread; every key wrapped, unwrapped and checked, then re-wrapped under a new master key",
+ "schemes": {
+  "RSA-2048-OAEP": {
+   "keys": 100000,
+   "wrap_seconds": 2.9631112609999946,
+   "unwrap_seconds": 40.68311389900009,
+   "rotate_seconds": 42.71276955500002,
+   "wrapped_bytes": 256,
+   "total_bytes": 25600000
+  },
+  "X25519": {
+   "keys": 100000,
+   "wrap_seconds": 8.596087701999977,
+   "unwrap_seconds": 5.005754617000093,
+   "rotate_seconds": 13.938100050999992,
+   "wrapped_bytes": 72,
+   "total_bytes": 7200000
+  },
+  "ML-KEM-768": {
+   "keys": 100000,
+   "wrap_seconds": 3.349121414000024,
+   "unwrap_seconds": 4.491756705000057,
+   "rotate_seconds": 8.03070625800001,
+   "wrapped_bytes": 1128,
+   "total_bytes": 112800000
+  },
+  "X25519+ML-KEM-768": {
+   "keys": 100000,
+   "wrap_seconds": 11.493438841000057,
+   "unwrap_seconds": 9.083447702999933,
+   "rotate_seconds": 21.239113950000046,
+   "wrapped_bytes": 1160,
+   "total_bytes": 116000000
+  }
+ }
+}

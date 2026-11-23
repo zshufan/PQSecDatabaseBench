@@ -1,0 +1,5 @@
+# Python packages (tested with Python 3.13, cryptography 50.0.1, NumPy 2.5.3, pandas 3.0.5).
+# cryptography must expose ML-KEM and ML-DSA (cryptography.hazmat.primitives.asymmetric.mlkem / mldsa).
+cryptography>=50.0
+numpy>=2.0
+pandas>=2.2

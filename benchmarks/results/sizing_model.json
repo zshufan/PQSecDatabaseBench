@@ -1,0 +1,58 @@
+{
+  "aggregation": {
+    "paillier_3072_bytes_per_value": 768,
+    "bfv": [
+      {
+        "ring_dimension": 4096,
+        "log2_q": 109,
+        "ciphertext_bytes": 111616,
+        "slots": 4096,
+        "bytes_per_value_full": 27.25,
+        "crossover_values_per_ciphertext": 145.3,
+        "single_value_blowup_vs_paillier": 145.3,
+        "full_packing_gain_vs_paillier": 28.2
+      },
+      {
+        "ring_dimension": 8192,
+        "log2_q": 218,
+        "ciphertext_bytes": 446464,
+        "slots": 8192,
+        "bytes_per_value_full": 54.5,
+        "crossover_values_per_ciphertext": 581.3,
+        "single_value_blowup_vs_paillier": 581.3,
+        "full_packing_gain_vs_paillier": 14.1
+      },
+      {
+        "ring_dimension": 16384,
+        "log2_q": 438,
+        "ciphertext_bytes": 1794048,
+        "slots": 16384,
+        "bytes_per_value_full": 109.5,
+        "crossover_values_per_ciphertext": 2336.0,
+        "single_value_blowup_vs_paillier": 2336.0,
+        "full_packing_gain_vs_paillier": 7.0
+      }
+    ]
+  },
+  "tpch": {
+    "labelling": "PII columns of CUSTOMER and SUPPLIER are long-horizon; all else short-horizon",
+    "long_horizon_bytes_per_sf": 9280000,
+    "long_horizon_fraction_of_raw_bytes": 0.0093,
+    "queries_total": 22,
+    "queries_touching_long_horizon": 7,
+    "queries_computing_on_long_horizon": [
+      "Q22 (predicate)",
+      "Q2/Q20/Q21 (ORDER BY)",
+      "Q10/Q18/Q21 (GROUP BY, functionally determined by a key)"
+    ],
+    "detail": {
+      "Q2": "s_name, s_address, s_phone in the output; ORDER BY s_name",
+      "Q10": "c_name, c_address, c_phone in the output and GROUP BY",
+      "Q15": "s_name, s_address, s_phone in the output",
+      "Q18": "c_name in the output and GROUP BY",
+      "Q20": "s_name, s_address in the output; ORDER BY s_name",
+      "Q21": "s_name in the output, GROUP BY and ORDER BY",
+      "Q22": "substring(c_phone) in a predicate and GROUP BY"
+    }
+  }
+}

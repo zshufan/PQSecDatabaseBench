@@ -1,0 +1,181 @@
+{
+ "machine": {
+  "cpu": "Intel(R) Xeon(R) Processor @ 2.10GHz"
+ },
+ "rows": 50000,
+ "payload_bytes": 100,
+ "schemes": {
+  "HMAC-SHA256": {
+   "sig_bytes": 32,
+   "sig_over_payload": 0.32,
+   "sqlite": {
+    "page_size": 4096,
+    "pages": 1792,
+    "rows_per_page": 27.901785714285715,
+    "scan_pages": 1792,
+    "rows_per_gb": 6811959.402901785
+   },
+   "postgres": {
+    "block_size": 8192,
+    "heap_pages": 1120,
+    "toast_pages": 0,
+    "total_bytes": 10354688,
+    "shared_buffers": "128MB",
+    "queries": {
+     "scan_payload": {
+      "first": {
+       "hit": 1120,
+       "read": 0
+      },
+      "second": {
+       "hit": 1120,
+       "read": 0
+      },
+      "pages_touched": 1120
+     },
+     "fetch_signatures": {
+      "first": {
+       "hit": 1120,
+       "read": 0
+      },
+      "second": {
+       "hit": 1120,
+       "read": 0
+      },
+      "pages_touched": 1120
+     }
+    },
+    "rows_per_gb": 4828730.715981012
+   }
+  },
+  "ECDSA P-256": {
+   "sig_bytes": 71,
+   "sig_over_payload": 0.71,
+   "sqlite": {
+    "page_size": 4096,
+    "pages": 2281,
+    "rows_per_page": 21.920210434020166,
+    "scan_pages": 2281,
+    "rows_per_gb": 5351613.875493205
+   },
+   "postgres": {
+    "block_size": 8192,
+    "heap_pages": 1360,
+    "toast_pages": 0,
+    "total_bytes": 12320768,
+    "shared_buffers": "128MB",
+    "queries": {
+     "scan_payload": {
+      "first": {
+       "hit": 1360,
+       "read": 0
+      },
+      "second": {
+       "hit": 1360,
+       "read": 0
+      },
+      "pages_touched": 1360
+     },
+     "fetch_signatures": {
+      "first": {
+       "hit": 1360,
+       "read": 0
+      },
+      "second": {
+       "hit": 1360,
+       "read": 0
+      },
+      "pages_touched": 1360
+     }
+    },
+    "rows_per_gb": 4058188.580452128
+   }
+  },
+  "ML-DSA-44": {
+   "sig_bytes": 2420,
+   "sig_over_payload": 24.2,
+   "sqlite": {
+    "page_size": 4096,
+    "pages": 50123,
+    "rows_per_page": 0.997546036749596,
+    "scan_pages": 50123,
+    "rows_per_gb": 243541.51287831934
+   },
+   "postgres": {
+    "block_size": 8192,
+    "heap_pages": 1024,
+    "toast_pages": 16667,
+    "total_bytes": 148422656,
+    "shared_buffers": "128MB",
+    "queries": {
+     "scan_payload": {
+      "first": {
+       "hit": 148,
+       "read": 876
+      },
+      "second": {
+       "hit": 1024,
+       "read": 0
+      },
+      "pages_touched": 1024
+     },
+     "fetch_signatures": {
+      "first": {
+       "hit": 134783,
+       "read": 16264
+      },
+      "second": {
+       "hit": 134598,
+       "read": 16449
+      },
+      "pages_touched": 151047
+     }
+    },
+    "rows_per_gb": 336875.79340986867
+   }
+  },
+  "ML-DSA-65": {
+   "sig_bytes": 3309,
+   "sig_over_payload": 33.09,
+   "sqlite": {
+    "page_size": 4096,
+    "pages": 50123,
+    "rows_per_page": 0.997546036749596,
+    "scan_pages": 50123,
+    "rows_per_gb": 243541.51287831934
+   },
+   "postgres": {
+    "block_size": 8192,
+    "heap_pages": 1024,
+    "toast_pages": 25000,
+    "total_bytes": 216702976,
+    "shared_buffers": "128MB",
+    "queries": {
+     "scan_payload": {
+      "first": {
+       "hit": 446,
+       "read": 578
+      },
+      "second": {
+       "hit": 1024,
+       "read": 0
+      },
+      "pages_touched": 1024
+     },
+     "fetch_signatures": {
+      "first": {
+       "hit": 126484,
+       "read": 24563
+      },
+      "second": {
+       "hit": 124958,
+       "read": 26089
+      },
+      "pages_touched": 151047
+     }
+    },
+    "rows_per_gb": 230730.56458624732
+   }
+  }
+ }
+}

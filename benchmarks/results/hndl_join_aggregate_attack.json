@@ -1,0 +1,30 @@
+{
+  "machine": {
+    "cpu": "Intel(R) Xeon(R) Processor @ 2.10GHz",
+    "python": "3.13.18",
+    "cryptography": "50.0.1",
+    "openssl": "OpenSSL 4.0.2 25 Aug 2026"
+  },
+  "protocol": "DDH-based private intersection-sum (Ion et al.), P-256 blinding as in Private Join and Compute, Paillier-3072",
+  "intended_output": {
+    "to_b": "intersection cardinality",
+    "to_a": "sum over the intersection",
+    "cardinality": 100,
+    "sum": 21320
+  },
+  "simulated_quantum_steps": [
+    "one elliptic-curve discrete logarithm (A's blinding exponent)",
+    "one factorisation (A's Paillier modulus)"
+  ],
+  "rows_a": 300,
+  "rows_b": 300,
+  "true_intersection": 100,
+  "recovered_pairs": 300,
+  "recovered_pairs_outside_intersection": 200,
+  "recovered_equals_a_input": true,
+  "domain_walked": 1000000,
+  "walk_seconds": 90.56,
+  "candidates_per_second_one_core": 11042,
+  "extrapolated_core_hours_for_1e9_identifiers": 25.2,
+  "paillier_decryptions_per_second_one_core": 3.7
+}

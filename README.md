@@ -1,0 +1,224 @@
+# PQSecDatabaseBench
+
+Benchmarks that measure what post-quantum cryptography costs a secure database, in
+computation time, stored bytes, and bytes transferred. They back the measurements in
+the paper *Post-Quantum Encrypted Databases: The Case for Horizon-Partitioned Secure
+Data Management*. Figure and section numbers below refer to that paper.
+
+The suite compares classical schemes at the parameters in common use today with their
+post-quantum replacements at the recommended parameters, at four levels:
+
+| Level | What is compared | Paper |
+|---|---|---|
+| Primitives | key exchange, key wrapping, signatures, additively homomorphic encryption, AES | Figs. 2, 3 |
+| Operators | CryptDB's onions (RND, DET, OPE, JOIN-ADJ, HOM) against a post-quantum counterpart, 1M rows | Fig. 4 |
+| Queries | TPC-H Q1, Q3, Q5, Q6, Q10 end to end over encrypted columns, with and without transfer to the client | Fig. 5 |
+| Use cases | many writers with only a public key, tuples that third parties verify, key hierarchies | Fig. 6 |
+
+It also includes a harvest-now-decrypt-later attack on a deployed private
+join-and-aggregate protocol, with the quantum steps simulated (Sec. II-A).
+
+## Requirements
+
+* Linux on x86-64 (the C kernels are built with `gcc -O3 -march=native`).
+* Python 3 (tested with 3.13) and the packages in `requirements.txt`. The
+  `cryptography` package must expose ML-KEM and ML-DSA
+  (`cryptography.hazmat.primitives.asymmetric.mlkem` and `mldsa`); version 50.0.1 was used.
+* `gcc`, GMP (`libgmp.so.10`), and the OpenSSL 3 development files (`libcrypto` and its
+  headers, for the JOIN-ADJ and EC-ElGamal kernels).
+* Optional: PostgreSQL 16 server binaries, for the PostgreSQL half of the signed-tuple
+  measurements. Without them those rows are skipped.
+
+On Ubuntu 24.04:
+
+```bash
+sudo apt install gcc libgmp10 libssl-dev postgresql-16   # postgresql-16 is optional
+pip install -r requirements.txt
+```
+
+The C kernels are compiled on first use into `benchmarks/build/`.
+
+## Running
+
+```bash
+./run_all.sh            # every benchmark in dependency order, then the figures (~30 min)
+```
+
+or one script at a time from `benchmarks/`:
+
+| Script | Writes `results/` | Paper | Kind | Runtime |
+|---|---|---|---|---|
+| `primitives_bench.py` | `primitives.json` | Fig. 2 (cost ratios), Fig. 3 (raising classical parameters) | measured | ~6 min |
+| `db_microbench.py` | `db_microbench.json` | Fig. 4 | measured; Paillier ingest and the signature rows projected from measured rates; reads `primitives.json` | ~2 min |
+| `tpch_bench.py --sf 0.1` | `tpch_sf0.1.json` | Fig. 5 top | measured; Paillier ingest and two BFV bars projected from measured unit costs | ~2 min |
+| `unpacked_bfv_bench.py` | `unpacked_bfv.json` | BFV with one value per ciphertext in Figs. 4 and 5 | projected from per-ciphertext costs; reads `primitives.json` and `tpch_sf0.1.json` | ~3 min |
+| `bandwidth_model.py` | `tpch_bandwidth.json` | Fig. 5 bottom and the break-even bandwidths in Sec. III-D | analytic: measured compute + 8 x bytes / bandwidth at 100 Mbps, round trips ignored | instant |
+| `pk_settings_bench.py` | `pk_settings.json` | Fig. 6a-b | measured | ~3 min |
+| `storage_io_bench.py` | `storage_io.json` | Fig. 6b "Pages" and the page and buffer-pool numbers in Sec. III-E | measured in pages | ~2 min |
+| `keyhier_bench.py` | `key_hierarchy.json` | Fig. 6c | measured | ~3 min |
+| `hndl_join_aggregate_attack.py` | `hndl_join_aggregate_attack.json` | Sec. II-A | measured, quantum steps simulated | ~2 min |
+| `sizing_model.py` | `sizing_model.json` | the TPC-H estimate in Sec. IV-C | analytic | instant |
+| `make_figures.py` | `../figures/*.tex` | Figs. 2-6 as pgfplots code | from the JSON results | instant |
+
+Every script records the machine it ran on in its JSON output.
+
+PostgreSQL is configured through environment variables: `PQDB_PG_BIN` (directory with
+`initdb`, `pg_ctl`, `postgres`, `psql`; default `/usr/lib/postgresql/16/bin`),
+`PQDB_PG_DIR` (scratch directory for a throwaway cluster, deleted and recreated),
+`PQDB_PG_PORT` (default 54329), and `PQDB_PG_USER` (when run as root, the server runs
+as this unprivileged user, created if missing).
+
+## Layout
+
+```
+benchmarks/
+  pqdb.py                 BFV, Paillier, EC-ElGamal and ASHE back ends; timing helpers
+  cryptdb.py              CryptDB's RND, DET, OPE and JOIN-ADJ onions (key size is a parameter)
+  tpch_gen.py             TPC-H data for the columns these queries use
+  bfv_kernel.c            BFV: NTT, encryption, addition, plaintext masks, RNS decryption
+  paillier_kernel.c       Paillier homomorphic sums and grouped sums on GMP
+  ecelgamal_kernel.c      EC-ElGamal on P-256 with baby-step giant-step decryption
+  joinadj_kernel.c        hash-to-curve and scalar multiplication on P-256
+  *_bench.py, *_model.py  the benchmarks listed above
+  results/                JSON results used in the paper
+figures/                  pgfplots code generated by make_figures.py
+```
+
+## Methodology
+
+1. **Parameters in use.** Classical primitives run at the parameters in common use
+   today (X25519 and P-256, RSA-2048, ECDSA P-256, Paillier-2048, EC-ElGamal P-256,
+   AES-128, CryptDB's JOIN-ADJ on P-256), post-quantum ones at their recommended
+   parameters (ML-KEM-768, ML-DSA-44 and -65, AES-256, BFV with N = 8192 at the
+   128-bit quantum bound). Classical public-key schemes have no quantum security at any
+   size, so the two sides are not matched by security level. Fig. 3 shows what raising
+   the classical parameters would cost instead. Key exchange is timed as a whole
+   handshake with key generation on both sides. Hybrid key exchange costs the sum of both.
+2. **Same function, same leakage today.** Both sides compute the same result and reveal
+   the same thing to the same party against a classical adversary. They differ only in
+   what a quantum adversary learns later. Decryption and other release steps are timed.
+   In these benchmarks the client is the data owner, so BFV's per-slot partial sums
+   reveal nothing new and ASHE may disclose the ids of the summed rows to the decryptor.
+3. **One platform, comparable implementations.** All runs are single-threaded on one
+   machine. KEMs and signatures use OpenSSL through `cryptography`, Paillier uses GMP
+   with the aggregation loop in C, and BFV uses the C kernel described below. Every
+   result is checked by decryption against the plaintext answer.
+4. **All dimensions.** Client and server time, stored bytes and bytes moved, per
+   operation, amortized and per update.
+
+## Implementation notes
+
+### BFV kernel
+
+No FHE library is used. `bfv_kernel.c` implements what additive aggregation needs:
+encryption straight into NTT form, addition, multiplication by a plaintext mask, and
+RNS decryption with Halevi-Polyakov-Shoup scaling. The NTT is the Harvey/Longa-Naehrig
+transform with Shoup multiplication and branch-free reductions, and plaintext products
+use SEAL's Barrett reduction. This is the scalar code path SEAL takes without Intel
+HEXL, so expect SEAL to be faster by a small constant factor and HEXL (AVX-512 IFMA)
+by more.
+
+Parameters are N = 8192, a 202-bit ciphertext modulus (five primes of 40-41 bits), and
+a 50-bit batching plaintext modulus, chosen so that the largest per-slot sums in TPC-H
+fit. 202 bits is the 128-bit quantum bound of the Homomorphic Encryption Standard for
+N = 8192 with a ternary secret (the classical bound is 218), as tabulated in OpenFHE's
+`stdlatticeparms.cpp`. Paillier uses a 2048-bit modulus with owner-side CRT encryption
+and CRT decryption.
+
+### Operators and queries: CryptDB as the classical case study
+
+The classical side is CryptDB (Popa et al., SOSP 2011) with MONOMI's precomputation of
+aggregated expressions, at today's common parameters. The post-quantum side replaces
+each onion:
+
+| Onion | CryptDB (classical) | Post-quantum |
+|---|---|---|
+| RND | AES-128-CBC, random IV | AES-256 |
+| DET | AES-128 on one block | AES-256 |
+| OPE | Boldyreva et al., AES-128 coins | same, AES-256 coins |
+| JOIN-ADJ | (K * PRF(v)) * G on P-256, adjusted once per column pair | none with the same leakage; the join columns share a DET key from ingest, which reveals their equalities before any join |
+| HOM | Paillier-2048 | BFV-8192 (server- or client-side grouping), or ASHE with AES-256 |
+
+OPE uses a 16-bit domain and a 29-bit range (NumPy's exact hypergeometric sampler is
+limited to populations below 10^9), and its cost is about one PRF call and one sample
+per domain bit. Deterministic onions are computed once per distinct value, as a caching
+proxy would, and JOIN-ADJ adjusts each distinct ciphertext once. The server hashes and
+compares 64 bits of each DET or JOIN-ADJ ciphertext. Storage counts RND(DET) and
+RND(OPE) at 32 bytes per value and CryptDB's join onion, RND(DET(JOIN-ADJ || DET)), at 80.
+
+The TPC-H executor checks every encrypted plan row by row against the plaintext plan
+(same rows selected, same grouping) and every aggregate against its plaintext answer.
+`tpch_gen.py` follows the TPC-H specification for the columns these queries use, since
+the official `dbgen` was not available. Paillier is run without MONOMI-style packing of
+several columns into one plaintext. Packing would cut Q1's server time by up to 5x and
+leaves the single-aggregate queries unchanged, so no ordering in Fig. 5 changes.
+
+### Aggregation schemes
+
+| Scheme | Side | Ciphertext | Notes |
+|---|---|---|---|
+| Paillier-2048 | classical | 512 B per value | GMP; owner-side CRT encryption, CRT decryption |
+| EC-ElGamal P-256 | classical | 66 B per value | libcrypto; decryption by baby-step giant-step over a 2^20-entry table built once (~5 s, not charged to operators); wider values are split into 16-bit limbs |
+| BFV-8192 | post-quantum | 413,696 B per 8,192 values | the C kernel above |
+| ASHE (Seabed, OSDI'16), AES-256 PRF | post-quantum | 8 B per value | symmetric; the decryptor needs the key and the ids of the summed rows, counted in the bytes; owner-decrypts use case only |
+
+Large Paillier columns reuse a pool of 4,096 genuine ciphertexts by index, since
+encrypting 600K-1M values per column would take hours and does not change the cost of
+homomorphic addition or decryption. Paillier ingest is projected from the measured
+per-value rate. EC-ElGamal does the same, with one pool per limb width of uniformly
+random limbs. BFV and ASHE columns hold the real values.
+
+### BFV with and without packing
+
+Every BFV result in Figs. 2, 4 and 5 appears twice. Dashed boxes are BFV with 8,192
+values packed into one ciphertext (measured by `db_microbench.py` and `tpch_bench.py`).
+Filled bars are BFV with one value per ciphertext, summed by plain ciphertext additions.
+`unpacked_bfv_bench.py` projects these as operation counts times the per-ciphertext
+unit costs in `primitives.json`. A full-scale run over 64 genuine ciphertexts
+(1,000,000 additions) took 1.1-1.7x the model, so the projections favor unpacked BFV.
+They also leave out I/O, and an unpacked one-million-row column is 414 GB.
+
+### Bytes as transfer time and pages
+
+Fig. 2 labels each byte ratio with both sizes, and Fig. 4 marks plaintext bytes with
+black ticks. Fig. 5 (bottom) adds the transfer to the client at 100 Mbps, and Fig. 6a
+has a right axis with the time a reading takes on a 1 Mbps uplink. `storage_io_bench.py`
+counts pages: SQLite pages per table (signatures are stored in line), and in PostgreSQL
+the buffers that `EXPLAIN (ANALYZE, BUFFERS)` reports for a payload scan and for a scan
+that fetches every signature, each run twice so that the second run shows the pages
+that do not stay in the 128 MB buffer pool.
+
+### Key hierarchies
+
+`keyhier_bench.py` wraps 100,000 random 256-bit data keys under an asymmetric master
+key, unwraps every one, and rotates the master key. RSA-2048-OAEP (SHA-256) encrypts
+the data key directly, as Always Encrypted and cloud KMSs do. X25519 follows HPKE's
+DHKEM shape (ephemeral key, HKDF-SHA256, AES-256 key wrap per RFC 3394). ML-KEM-768
+replaces the ephemeral X25519 key with an encapsulation, and the hybrid feeds both
+shared secrets into one HKDF. Wrapped keys are 256 (RSA), 72 (X25519), 1,128 (ML-KEM-768)
+and 1,160 bytes (hybrid).
+
+### The attack script
+
+`hndl_join_aggregate_attack.py` runs the DDH-based private intersection-sum protocol
+(Ion et al., EuroS&P 2020), records the view of the party that should learn only the
+intersection size, and recovers the other party's whole input table from that view.
+It cannot run Shor's algorithm. The two quantum steps (one elliptic-curve discrete
+logarithm, one factorization) are simulated by handing the adversary their outputs.
+What is executed and timed is the adversary's classical work, a dictionary walk over
+the identifier domain at one hash-to-curve and one scalar multiplication per candidate.
+
+## Committed results
+
+The results cited in the paper come from one run on a 2-vCPU cloud VM (Intel Xeon,
+2.1 GHz), single-threaded, with Python 3.13, `cryptography` 50.0.1 (bundling OpenSSL
+4.0.2), GMP 6.3.0, and gcc 13.3. `tpch_sf0.01.json` is a smaller run (on a 2.3 GHz
+Xeon), kept as a check on how the TPC-H costs scale.
+
+## Limitations
+
+* BFV is not cross-checked against SEAL or OpenFHE, and the TPC-H data is not produced
+  by the official `dbgen`.
+* Unpacked BFV, Paillier ingest, and some signature rows are projected from measured
+  unit costs, as marked above and in each JSON file.
+* The transfer model ignores round trips.

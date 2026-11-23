@@ -1,0 +1,261 @@
+{
+ "sf": 0.01,
+ "lineitem_rows": 60021,
+ "machine": {
+  "cpu": "Intel(R) Xeon(R) Processor @ 2.30GHz"
+ },
+ "params": {
+  "paillier_bits": 3072,
+  "paillier_ct_bytes": 768,
+  "bfv_n": 8192,
+  "bfv_log2_q": 202,
+  "bfv_t_bits": 50,
+  "bfv_ct_bytes": 413696,
+  "bfv_ciphertexts_per_column": 8,
+  "hom_columns": [
+   "charge",
+   "disc_price",
+   "l_discount",
+   "l_extendedprice",
+   "l_quantity",
+   "price_x_disc"
+  ]
+ },
+ "worlds": {
+  "cryptdb": {
+   "ingest_relational": 1.5911144649995776,
+   "one_time": 0.9335219889997006,
+   "join_adjust": 0.9309206379998614,
+   "storage_relational": 22876080
+  },
+  "pq": {
+   "ingest_relational": 1.1719240669998499,
+   "one_time": 0.0023817769998686344,
+   "join_adjust": 0.0,
+   "storage_relational": 15517824
+  }
+ },
+ "hom": {
+  "paillier": {
+   "ingest": 4888.659954495003,
+   "ingest_projected": true,
+   "storage": 276576768
+  },
+  "bfv": {
+   "ingest": 0.10254897499987692,
+   "storage": 19857408
+  },
+  "ashe": {
+   "ingest": 0.006334020000167584,
+   "storage": 2881008
+  }
+ },
+ "unit_costs": {
+  "bfv_mask_prepare": 0.0007724275138888827,
+  "bfv_mul_plain": 0.00034054048825334993,
+  "bfv_decrypt": 0.0008855685380530931,
+  "paillier_encrypt": 0.013574859783784017
+ },
+ "queries": {
+  "Q1": {
+   "aggregates": 5,
+   "groups": 4,
+   "selected_rows": 59179,
+   "cryptdb": {
+    "hom_server": 2.379451599000049,
+    "hom_client": 0.14442187099996318,
+    "shipped": 15488,
+    "rel_server": 0.01565320299994255,
+    "rel_client": 0.00047426500009351,
+    "total": 2.5400009380000483
+   },
+   "pq_bfv": {
+    "hom_server": 0.0840117120000059,
+    "hom_client": 0.01790732200004186,
+    "shipped": 8274048,
+    "projected": false,
+    "mask_ops": 32,
+    "rel_server": 0.010831665999944562,
+    "rel_client": 0.0004072280000855244,
+    "total": 0.11315792800007785
+   },
+   "pq_bfv_client": {
+    "hom_server": 0.0,
+    "hom_client": 0.03966460600008759,
+    "shipped": 16547968,
+    "rel_server": 0.010831665999944562,
+    "rel_client": 0.0004072280000855244,
+    "total": 0.050903500000117674
+   },
+   "pq_ashe": {
+    "hom_server": 0.0033168649999879563,
+    "hom_client": 0.003575209000018731,
+    "shipped": 23706,
+    "id_bytes": 23418,
+    "rel_server": 0.010831665999944562,
+    "rel_client": 0.0004072280000855244,
+    "total": 0.018130968000036773
+   }
+  },
+  "Q3": {
+   "aggregates": 1,
+   "groups": 108,
+   "selected_rows": 289,
+   "cryptdb": {
+    "hom_server": 0.001842198000076678,
+    "hom_client": 0.7018255320000435,
+    "shipped": 83424,
+    "rel_server": 0.0025388760000168986,
+    "rel_client": 0.0010253650000322523,
+    "total": 0.7072319710001693
+   },
+   "pq_bfv": {
+    "hom_server": 0.12020054423136114,
+    "hom_client": 0.09564140210973406,
+    "shipped": 44679648,
+    "projected": true,
+    "mask_ops": 108,
+    "rel_server": 0.002268522999997913,
+    "rel_client": 0.000603613999942354,
+    "total": 0.21871408334103548
+   },
+   "pq_bfv_client": {
+    "hom_server": 0.0,
+    "hom_client": 0.007888662999903318,
+    "shipped": 3310048,
+    "rel_server": 0.002268522999997913,
+    "rel_client": 0.000603613999942354,
+    "total": 0.010760799999843584
+   },
+   "pq_ashe": {
+    "hom_server": 0.00018545399996128253,
+    "hom_client": 0.00013100600006055174,
+    "shipped": 1825,
+    "id_bytes": 481,
+    "rel_server": 0.002268522999997913,
+    "rel_client": 0.000603613999942354,
+    "total": 0.003188596999962101
+   }
+  },
+  "Q5": {
+   "aggregates": 1,
+   "groups": 5,
+   "selected_rows": 55,
+   "cryptdb": {
+    "hom_server": 0.0010009060000584213,
+    "hom_client": 0.03719610999996803,
+    "shipped": 3920,
+    "rel_server": 0.006188940000015464,
+    "rel_client": 0.0007100239999999758,
+    "total": 0.04509598000004189
+   },
+   "pq_bfv": {
+    "hom_server": 0.030877742000029684,
+    "hom_client": 0.005294368000022587,
+    "shipped": 2068560,
+    "projected": false,
+    "mask_ops": 27,
+    "rel_server": 0.004228477999959068,
+    "rel_client": 0.0007244060000175523,
+    "total": 0.04112499400002889
+   },
+   "pq_bfv_client": {
+    "hom_server": 0.0,
+    "hom_client": 0.007459631000074296,
+    "shipped": 3309648,
+    "rel_server": 0.004228477999959068,
+    "rel_client": 0.0007244060000175523,
+    "total": 0.012412515000050917
+   },
+   "pq_ashe": {
+    "hom_server": 0.00011877700001150515,
+    "hom_client": 7.714900004884839e-05,
+    "shipped": 277,
+    "id_bytes": 157,
+    "rel_server": 0.004228477999959068,
+    "rel_client": 0.0007244060000175523,
+    "total": 0.005148810000036974
+   }
+  },
+  "Q6": {
+   "aggregates": 1,
+   "groups": 1,
+   "selected_rows": 1136,
+   "cryptdb": {
+    "hom_server": 0.00931138999999348,
+    "hom_client": 0.006711449000022185,
+    "shipped": 768,
+    "rel_server": 0.0003882190000012997,
+    "rel_client": 0.001254906000099254,
+    "total": 0.01766596400011622
+   },
+   "pq_bfv": {
+    "hom_server": 0.009472730999959822,
+    "hom_client": 0.0009071739999626516,
+    "shipped": 413696,
+    "projected": false,
+    "mask_ops": 8,
+    "rel_server": 0.0004415190001054725,
+    "rel_client": 0.0013693309999780467,
+    "total": 0.012190755000005993
+   },
+   "pq_bfv_client": {
+    "hom_server": 0.0,
+    "hom_client": 0.0077193419999730395,
+    "shipped": 3309568,
+    "rel_server": 0.0004415190001054725,
+    "rel_client": 0.0013693309999780467,
+    "total": 0.009530192000056559
+   },
+   "pq_ashe": {
+    "hom_server": 0.00012878099994395598,
+    "hom_client": 6.731099995249679e-05,
+    "shipped": 2198,
+    "id_bytes": 2190,
+    "rel_server": 0.0004415190001054725,
+    "rel_client": 0.0013693309999780467,
+    "total": 0.002006941999979972
+   }
+  },
+  "Q10": {
+   "aggregates": 1,
+   "groups": 368,
+   "selected_rows": 1073,
+   "cryptdb": {
+    "hom_server": 0.006772746000024199,
+    "hom_client": 2.5083418680000023,
+    "shipped": 282944,
+    "rel_server": 0.0026199060000635654,
+    "rel_client": 0.0004387149999729445,
+    "total": 2.518173235000063
+   },
+   "pq_bfv": {
+    "hom_server": 0.5064004409747159,
+    "hom_client": 0.32588922200353826,
+    "shipped": 152240448,
+    "projected": true,
+    "mask_ops": 455,
+    "rel_server": 0.0019082899999602887,
+    "rel_client": 0.0005043919999252466,
+    "total": 0.8347023449781397
+   },
+   "pq_bfv_client": {
+    "hom_server": 0.0,
+    "hom_client": 0.007838212000024214,
+    "shipped": 3309888,
+    "rel_server": 0.0019082899999602887,
+    "rel_client": 0.0005043919999252466,
+    "total": 0.01025089399990975
+   },
+   "pq_ashe": {
+    "hom_server": 0.00019117600004392443,
+    "hom_client": 0.00014190900003541174,
+    "shipped": 5389,
+    "id_bytes": 2125,
+    "rel_server": 0.0019082899999602887,
+    "rel_client": 0.0005043919999252466,
+    "total": 0.0027457669999648715
+   }
+  }
+ }
+}

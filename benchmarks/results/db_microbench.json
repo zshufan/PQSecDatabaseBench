@@ -1,0 +1,250 @@
+{
+ "rows": 1000000,
+ "machine": {
+  "cpu": "Intel(R) Xeon(R) Processor @ 2.10GHz"
+ },
+ "ops": {
+  "eq_ingest": {
+   "cryptdb": {
+    "seconds": 0.06162154600008307,
+    "bytes": 32000000
+   },
+   "pq": {
+    "seconds": 0.06307896900000287,
+    "bytes": 32000000
+   }
+  },
+  "eq_peel": {
+   "cryptdb": {
+    "seconds": 0.007679843999994773,
+    "bytes": 0
+   },
+   "pq": {
+    "seconds": 0.008440866999990249,
+    "bytes": 0
+   }
+  },
+  "eq_select": {
+   "cryptdb": {
+    "seconds": 0.0008876150000105554,
+    "bytes": 352
+   },
+   "pq": {
+    "seconds": 0.0009090429999787375,
+    "bytes": 352
+   }
+  },
+  "ord_ingest": {
+   "cryptdb": {
+    "seconds": 1.3427781880000111,
+    "bytes": 32000000,
+    "distinct": 3650
+   },
+   "pq": {
+    "seconds": 1.2909282429999394,
+    "bytes": 32000000,
+    "distinct": 3650
+   }
+  },
+  "ord_select": {
+   "cryptdb": {
+    "seconds": 0.0016996510000808485,
+    "bytes": 326048
+   },
+   "pq": {
+    "seconds": 0.0016773410000041622,
+    "bytes": 326048
+   }
+  },
+  "join_ingest": {
+   "cryptdb": {
+    "seconds": 7.70066060299996,
+    "bytes": 49000000,
+    "note": "JOIN-ADJ || DET per row; distinct values encrypted once"
+   },
+   "pq": {
+    "seconds": 0.012170635999950719,
+    "bytes": 16000000,
+    "leaks_more_today": true,
+    "note": "DET under a key shared by the join columns"
+   }
+  },
+  "join_adjust": {
+   "cryptdb": {
+    "seconds": 19.823745918999975,
+    "bytes": 0,
+    "distinct": 245349
+   },
+   "pq": {
+    "seconds": 0.0,
+    "bytes": 0,
+    "not_applicable": true
+   }
+  },
+  "join_run": {
+   "cryptdb": {
+    "seconds": 0.08692113699999027,
+    "bytes": 0
+   },
+   "pq": {
+    "seconds": 0.08556238400001348,
+    "bytes": 0
+   }
+  },
+  "ingest": {
+   "paillier": {
+    "seconds": 5729.764034285836,
+    "projected": true,
+    "bytes": 512000000
+   },
+   "bfv": {
+    "seconds": 0.31303876200001923,
+    "bytes": 50884608
+   },
+   "ashe": {
+    "seconds": 0.027447623999933057,
+    "bytes": 8000000
+   }
+  },
+  "sum": {
+   "paillier": {
+    "seconds": 5.776224772000091,
+    "server": 5.773402339000086,
+    "client": 0.0028224330000057307,
+    "bytes": 512
+   },
+   "ashe": {
+    "seconds": 0.01615041899992775,
+    "server": 0.015996717000007266,
+    "client": 0.00015370199992048583,
+    "bytes": 12,
+    "id_bytes": 4,
+    "runs": 1
+   },
+   "bfv": {
+    "seconds": 0.0149862519999715,
+    "server": 0.013742128999979286,
+    "client": 0.0012441229999922143,
+    "bytes": 413696
+   }
+  },
+  "filter": {
+   "paillier": {
+    "seconds": 0.06299603000002207,
+    "server": 0.06014069299999392,
+    "client": 0.0028553370000281575,
+    "bytes": 512
+   },
+   "ashe": {
+    "seconds": 0.0021219029999883787,
+    "server": 0.001645133000010901,
+    "client": 0.0004767699999774777,
+    "bytes": 22585,
+    "id_bytes": 22577,
+    "runs": 9927
+   },
+   "bfv": {
+    "seconds": 0.17648914200003674,
+    "server": 0.1751986520000628,
+    "client": 0.0012904899999739428,
+    "bytes": 413696
+   }
+  },
+  "groupby": {
+   "paillier": {
+    "seconds": 6.06324280299998,
+    "server": 5.865614731000051,
+    "client": 0.1976280719999295,
+    "bytes": 32768
+   },
+   "ashe": {
+    "seconds": 0.17903914399994392,
+    "server": 0.09463101500000448,
+    "client": 0.08440812899993944,
+    "bytes": 2102250,
+    "id_bytes": 2101738,
+    "runs": 984344
+   },
+   "bfv": {
+    "seconds": 11.658983672999966,
+    "server": 11.580917269999986,
+    "client": 0.0780664029999798,
+    "bytes": 26476544
+   },
+   "bfv_client": {
+    "seconds": 0.15554632700002458,
+    "server": 0.0,
+    "client": 0.15554632700002458,
+    "bytes": 50884608
+   }
+  },
+  "update": {
+   "paillier": {
+    "seconds": 0.0057297640342858355,
+    "bytes": 512
+   },
+   "bfv": {
+    "seconds": 0.002383812554761887,
+    "bytes": 413696
+   },
+   "ashe": {
+    "seconds": 7.694793710275546e-06,
+    "bytes": 8,
+    "note": "appends under a fresh id; the old id is tombstoned"
+   }
+  },
+  "sign": {
+   "classical": {
+    "seconds": 29.540987829375467,
+    "projected": true,
+    "bytes": 64000000
+   },
+   "pq": {
+    "seconds": 699.4014475524707,
+    "projected": true,
+    "bytes": 2420000000
+   }
+  },
+  "verify": {
+   "classical": {
+    "seconds": 90.57211946381818,
+    "projected": true,
+    "bytes": 64000000
+   },
+   "pq": {
+    "seconds": 120.61776239294726,
+    "projected": true,
+    "bytes": 2420000000
+   }
+  },
+  "aes_chunk": {
+   "classical": {
+    "seconds": 0.004182747889352875,
+    "bytes": 33554448,
+    "note": "AES-128-GCM"
+   },
+   "pq": {
+    "seconds": 0.00426038816808517,
+    "bytes": 33554448,
+    "note": "AES-256-GCM"
+   }
+  }
+ },
+ "params": {
+  "paillier_bits": 2048,
+  "bfv_n": 8192,
+  "bfv_log2_q": 202,
+  "bfv_t_bits": 50,
+  "bfv_ciphertexts": 123,
+  "bfv_ct_bytes": 413696,
+  "paillier_ct_bytes": 512,
+  "keys": 100000,
+  "days": 3650,
+  "pk_rows": 250000,
+  "ashe_prf": "AES-256",
+  "groups": 64,
+  "selectivity": 0.01,
+  "pool": 4096,
+  "value_max": 1000
+ }
+}
