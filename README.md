@@ -48,15 +48,15 @@ or one script at a time from `benchmarks/`:
 
 | Script | Writes `results/` | Paper | Kind | Runtime |
 |---|---|---|---|---|
-| `primitives_bench.py` | `primitives.json` | Fig. 2 (cost ratios), Fig. 3 (raising classical parameters) | measured | ~6 min |
+| `primitives_bench.py` | `primitives.json` | Fig. 2 (cost ratios), Fig. 3 (raising classical parameters) | measured | ~4 min |
 | `db_microbench.py` | `db_microbench.json` | Fig. 4 | measured; Paillier ingest and the signature rows projected from measured rates; reads `primitives.json` | ~2 min |
-| `tpch_bench.py --sf 0.1` | `tpch_sf0.1.json` | Fig. 5 top | measured; Paillier ingest and two BFV bars projected from measured unit costs | ~2 min |
+| `tpch_bench.py --sf 0.1` | `tpch_sf0.1.json` | Fig. 5 top | measured; Paillier ingest and two BFV bars projected from measured unit costs | ~6 min |
 | `unpacked_bfv_bench.py` | `unpacked_bfv.json` | BFV with one value per ciphertext in Figs. 4 and 5 | projected from per-ciphertext costs; reads `primitives.json` and `tpch_sf0.1.json` | ~3 min |
 | `bandwidth_model.py` | `tpch_bandwidth.json` | Fig. 5 bottom and the break-even bandwidths in Sec. III-D | analytic: measured compute + 8 x bytes / bandwidth at 100 Mbps, round trips ignored | instant |
 | `pk_settings_bench.py` | `pk_settings.json` | Fig. 6a-b | measured | ~3 min |
 | `storage_io_bench.py` | `storage_io.json` | Fig. 6b "Pages" and the page and buffer-pool numbers in Sec. III-E | measured in pages | ~2 min |
 | `keyhier_bench.py` | `key_hierarchy.json` | Fig. 6c | measured | ~3 min |
-| `hndl_join_aggregate_attack.py` | `hndl_join_aggregate_attack.json` | Sec. II-A | measured, quantum steps simulated | ~2 min |
+| `hndl_join_aggregate_attack.py` | `hndl_join_aggregate_attack.json` | Sec. II-A | measured, quantum steps simulated | ~4 min |
 | `sizing_model.py` | `sizing_model.json` | the TPC-H estimate in Sec. IV-C | analytic | instant |
 | `make_figures.py` | `../figures/*.tex` | Figs. 2-6 as pgfplots code | from the JSON results | instant |
 

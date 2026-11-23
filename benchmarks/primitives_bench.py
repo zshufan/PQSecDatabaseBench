@@ -22,7 +22,7 @@ Scaling sweep (classical security level in bits, NIST SP 800-57):
 with ML-KEM-768/1024 and ML-DSA-44/65/87 as references. RSA-15360 is left
 out because generating its key takes too long here.
 
-    python3 benchmarks/primitives_bench.py        # ~6 minutes
+    python3 benchmarks/primitives_bench.py        # ~4 minutes
 
 Writes benchmarks/results/primitives.json.
 """

@@ -27,7 +27,7 @@ group elements, one discrete logarithm on the sum of B's blinded elements
 against the sum of A's re-blinded ones yields A's exponent even though A
 shuffles them.
 
-    python3 benchmarks/hndl_join_aggregate_attack.py           # ~1-2 minutes
+    python3 benchmarks/hndl_join_aggregate_attack.py           # ~4 minutes
 """
 import argparse
 import hashlib
